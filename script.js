@@ -5,6 +5,20 @@ class TaskManager {
         this.init();
     }
 
+    init() {
+        const taskInput = document.getElementById('taskInput');
+        const addBtn = document.getElementById('addBtn');
+
+        if (addBtn) {
+            addBtn.addEventListener('click', () => this.addTask());
+        }
+
+        if (taskInput) {
+            taskInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    this.addTask();
+                }
+            });
         }
 
         this.renderTasks();
@@ -22,7 +36,23 @@ class TaskManager {
 
         const task = {
             id: Date.now(),
-            text: taskText,ks();
+            text: taskText,
+            completed: false,
+            createdAt: new Date().toLocaleString()
+        };
+
+        this.tasks.push(task);
+        this.saveTasks();
+        this.renderTasks();
+        this.updateStats();
+        taskInput.value = '';
+        taskInput.focus();
+    }
+
+    deleteTask(id) {
+        this.tasks = this.tasks.filter(task => task.id !== id);
+        this.saveTasks();
+        this.renderTasks();
         this.updateStats();
     }
 
@@ -46,7 +76,31 @@ class TaskManager {
             taskList.innerHTML = '<li style="text-align: center; opacity: 0.6;">No tasks yet. Add one to get started!</li>';
             return;
         }
-ment.getElementById('pendingCount');
+
+        this.tasks.forEach(task => {
+            const li = document.createElement('li');
+            li.className = `task-item ${task.completed ? 'completed' : ''}`;
+            li.innerHTML = `
+                <div style="flex: 1;">
+                    <strong>${this.escapeHtml(task.text)}</strong>
+                    <br/>
+                    <small style="opacity: 0.7;">${task.createdAt}</small>
+                </div>
+                <div>
+                    <button onclick="taskManager.toggleTask(${task.id})" style="background-color: #005500;">
+                        ${task.completed ? 'Undo' : 'Complete'}
+                    </button>
+                    <button onclick="taskManager.deleteTask(${task.id})" class="delete-btn">Delete</button>
+                </div>
+            `;
+            taskList.appendChild(li);
+        });
+    }
+
+    updateStats() {
+        const totalCount = document.getElementById('totalCount');
+        const completedCount = document.getElementById('completedCount');
+        const pendingCount = document.getElementById('pendingCount');
 
         const completed = this.tasks.filter(task => task.completed).length;
         const pending = this.tasks.length - completed;
