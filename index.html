@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mendl Jacobs - DevOps Engineer</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         * {
             margin: 0;
@@ -253,6 +254,7 @@
         <a href="#about">About Me</a>
         <a href="#skills">Skills</a>
         <a href="#experience">Experience</a>
+        <a href="#tasks">Task Manager</a>
         <a href="#contact">Contact</a>
     </nav>
 
@@ -347,6 +349,32 @@
             </div>
         </section>
 
+        <!-- Task Manager Section -->
+        <section id="tasks">
+            <h2>Task Manager</h2>
+            <div class="task-manager">
+                <div class="task-input">
+                    <input type="text" id="taskInput" placeholder="Enter a new task...">
+                    <button id="addBtn">Add Task</button>
+                </div>
+                <ul id="taskList"></ul>
+                <div class="stats">
+                    <div class="stat-box">
+                        <h3>Total Tasks</h3>
+                        <div class="number" id="totalCount">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Completed</h3>
+                        <div class="number" id="completedCount">0</div>
+                    </div>
+                    <div class="stat-box">
+                        <h3>Pending</h3>
+                        <div class="number" id="pendingCount">0</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Contact Section -->
         <section id="contact">
             <h2>Contact Me</h2>
@@ -374,5 +402,7 @@
     <footer>
         <p>&copy; 2026 DevOps Engineer Portfolio. All rights reserved.</p>
     </footer>
+
+    <script src="script.js"></script>
 </body>
 </html>
