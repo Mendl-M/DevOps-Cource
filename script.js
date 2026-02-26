@@ -1,27 +1,5 @@
 // Task Manager Business Logic
 class TaskManager {
-    constructor() {
-        this.tasks = this.loadTasks();
-        this.init();
-    }
-
-    init() {
-        const taskInput = document.getElementById('taskInput');
-        const addBtn = document.getElementById('addBtn');
-
-        if (addBtn) {
-            addBtn.addEventListener('click', () => this.addTask());
-        }
-
-        if (taskInput) {
-            taskInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    this.addTask();
-                }
-            });
-        }
-
-        this.renderTasks();
         this.updateStats();
     }
 
